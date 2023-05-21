@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto Slab;
+  font-size: medium;
+  /* background-image: url('../img/flags_of_world.jpg'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 90%;
+  height: 100%;
+}
