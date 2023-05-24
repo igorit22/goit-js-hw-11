@@ -7,21 +7,75 @@ body {
   font-size: medium;
   margin: 0;
   padding: 20px;
-  /* background-image: url('../img/flags_of_world.jpg'); */
-  /* background-size: cover;
+  background-image: url('../img/si-ukr-mod.jpg'); 
+  /* background-size: cover; */
   background-repeat: no-repeat;
-  width: 90%;
-  height: 100%; */
 }
 
-h1 {
+.hero-title {
   text-align: center;
+  color: #2c2646;
+  font-size: 45px;
+  margin-top: 90px;
+}
+
+input[type="text"]::placeholder {
+  color: #2c2646;
+  font-style: italic;
+  font-size: medium;
+  opacity: 0.7; 
 }
 
 .search-form {
   text-align: center;
   margin-bottom: 20px;
+} 
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.search-input {
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  padding: 10px 16px;
+  width: 300px;
+  font-size: 18px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.search-input:focus {
+  border-color: #4d90fe;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-button {
+  margin-bottom: 25px;
+  margin-top: 25px;
+  background-color: #f2f2f2;
+  border: 1px solid;
+  border-color: transparent;
+  border-radius: 3px;
+  color: #5f6368;
+  padding: 8px 16px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.search-button:hover {
+  background-color: #e8e8e8;
+  border: none;
+  border-radius: 3px;
+  border: 1px solid;
+  opacity: 0.5;
+  color: #2c2646;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 
 .gallery {
   display: grid;
@@ -52,11 +106,20 @@ h1 {
   font-weight: bold;
 }
 
-.notiflix-notify {
-  color: #fff !important;
-  background-color: #333 !important;
+
+input[type="text"].search-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+  transition: box-shadow 0.3s ease;
 }
 
-.notiflix-notify.failure {
-  background-color: #ff4444 !important;
+input[type="text"].search-input:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"].search-input:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
