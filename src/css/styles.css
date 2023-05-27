@@ -23,6 +23,7 @@ body {
   color: #ffffff;
   font-size: 45px;
   margin-top: 90px;
+  /* margin-bottom: 50px; */
 }
 
 input[type='text']::placeholder {
@@ -59,7 +60,7 @@ input[type='text']::placeholder {
 }
 
 .search-button {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   margin-top: 25px;
   background-color: #eb782c;
   border: 1px solid;
@@ -154,4 +155,18 @@ input[type='text'].search-input:focus {
   opacity: 0.5;
   color: #ffffff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  padding-top: 15px;
+  background: linear-gradient(
+    to right,
+    rgba(46, 47, 66, 0.7),
+    rgba(46, 47, 66, 0.7));
+
 }

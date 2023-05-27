@@ -54,21 +54,18 @@ function renderImages(images) {
 
     function playNextImageGroup() {
       // Виконати логіку відтворення наступної групи зображень
-    
+
       const { height: cardHeight } = document
-        .querySelector(".gallery")
+        .querySelector('.gallery')
         .firstElementChild.getBoundingClientRect();
-    
+
       window.scrollBy({
-        top: cardHeight / 2,
-        behavior: "smooth",
+        top: cardHeight * 1.75,
+        behavior: 'smooth',
       });
     }
-    
     // Викликати функцію після відтворення кожної наступної групи зображень
     playNextImageGroup();
-    
-
   });
 
   // Оновлення галереї після додавання нових зображень
@@ -179,3 +176,27 @@ document.querySelector('.load-more').addEventListener('click', async () => {
     Notiflix.Notify.failure('Error fetching images. Please try again later.');
   }
 });
+
+// Отримуємо елемент форми за його ідентифікатором
+const searchForm = document.getElementById('search-form');
+
+// Отримуємо відстань елементу форми від верхньої частини сторінки
+const searchFormOffsetTop = searchForm.offsetTop;
+
+// Функція, яка буде виконуватися при прокручуванні сторінки
+function handleScroll() {
+  // Отримуємо поточну позицію прокрутки
+  const scrollPosition = window.pageYOffset;
+
+  // Перевіряємо, чи прокрутили сторінку вниз досить далеко
+  if (scrollPosition >= searchFormOffsetTop) {
+    // Якщо так, додаємо клас "fixed" до елементу форми
+    searchForm.classList.add('fixed');
+  } else {
+    // Якщо ні, видаляємо клас "fixed" з елементу форми
+    searchForm.classList.remove('fixed');
+  }
+}
+
+// Додаємо обробник події "scroll" до вікна
+window.addEventListener('scroll', handleScroll);
