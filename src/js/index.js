@@ -100,6 +100,11 @@ document.getElementById('search-form').addEventListener('submit', async (event) 
   }
     });
     
+    const heroTitle = document.querySelector('.hero-title');
+    const searchContainer = document.querySelector('.search-container');
+    heroTitle.classList.add('search-active');
+    searchContainer.classList.add('search-active');
+
 // Функція для відображення кнопки "Load more"
 function showLoadMoreButton() {
     const loadMoreButton = document.querySelector('.load-more');
