@@ -7,14 +7,14 @@ body {
   font-size: medium;
   margin: 0;
   padding: 20px;
-  background-image: url('../img/si-ukr-mod.jpg'); 
-  /* background-size: cover; */
+  background-image: url('../img/background_mod.jpg'); 
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
 .hero-title {
   text-align: center;
-  color: #2c2646;
+  color: #ffffff;
   font-size: 45px;
   margin-top: 90px;
 }
