@@ -77,24 +77,7 @@ function hideLoadMoreButton() {
   const loadMoreButton = document.querySelector('.load-more');
   loadMoreButton.style.display = 'none';
 }
-
-// Приховання кнопки "Load more" при запуску
 hideLoadMoreButton();
-
-// Функція, яка буде виконуватися при прокручуванні сторінки
-function handleScroll() {
-  const scrollPosition = window.pageYOffset;
-  const windowHeight = window.innerHeight;
-  const documentHeight = document.documentElement.scrollHeight;
-
-  // Перевіряємо, чи досягнута нижня частина сторінки після завантаження нових зображень
-  if (scrollPosition + windowHeight >= documentHeight - 100) {
-    const loadMoreButton = document.querySelector('.load-more');
-    loadMoreButton.style.display = 'block';
-  }
-}
-
-window.addEventListener('scroll', handleScroll);
 
 // Обробник події для кнопки "load-more"
 document.querySelector('.load-more').addEventListener('click', async () => {
