@@ -77,11 +77,48 @@ input[type='text']::placeholder {
   background-color: #06ad5f;
   border: none;
   border-radius: 3px;
-  border: 1px solid;
+  border: 1px solid #02552e;
   opacity: 0.5;
   color: #ffffff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+
+/* 
+#spinerBtn {
+  position: relative;
+}
+#spinerBtn:focus,
+#spinerBtn:hover {
+  color: transparent;
+
+}
+
+#spinerBtn:hover::after,
+#spinerBtn:focus::after {
+  position: absolute;
+  content: "";
+  border: 0.2em solid #ffffff;
+  width: 1em;
+  height: 1em;
+  top: 0.15em;
+  border-radius: 1em;
+  top: 20%;
+  left: 40%;
+  transform: translate(-50%,);
+  border-top-color: #424242;
+  animation: spin 1s linear infinite;
+
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+
 
 .gallery {
   display: grid;
@@ -151,7 +188,7 @@ input[type='text'].search-input:focus {
   background-color: #06ad5f;
   border: none;
   border-radius: 3px;
-  border: 1px solid;
+  border: 1px solid #02552e;
   opacity: 0.5;
   color: #ffffff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
