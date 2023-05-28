@@ -1,61 +1,10 @@
-
 import Notiflix from 'notiflix';
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 import { searchImages } from './api.js';
+import { renderImages } from './gallery.js';
 
-searchImages();
-// Функція для рендерингу зображень
-function renderImages(images) {
-  const galleryElement = document.querySelector('.gallery');
-
-  images.forEach(image => {
-    const photoCard = document.createElement('div');
-    photoCard.classList.add('photo-card');
-
-    const imgElement = document.createElement('img');
-    imgElement.src = image.webformatURL;
-    imgElement.alt = image.tags;
-    imgElement.loading = 'lazy';
-
-    const aElement = document.createElement('a');
-    aElement.href = image.largeImageURL;
-    aElement.setAttribute('data-lightbox', 'gallery');
-
-    const infoElement = document.createElement('div');
-    infoElement.classList.add('info');
-    infoElement.innerHTML = `<p class="info-item"><b>Likes</b> ${image.likes}</p>
-                             <p class="info-item"><b>Views</b> ${image.views}</p>
-                             <p class="info-item"><b>Comments</b> ${image.comments}</p>
-                             <p class="info-item"><b>Downloads</b> ${image.downloads}</p>`;
-
-    aElement.appendChild(imgElement);
-    photoCard.appendChild(aElement);
-    photoCard.appendChild(infoElement);
-
-    galleryElement.appendChild(photoCard);
-
-    function playNextImageGroup() {
-      // Виконати логіку відтворення наступної групи зображень
-
-      const { height: cardHeight } = document
-        .querySelector('.gallery')
-        .firstElementChild.getBoundingClientRect();
-
-      window.scrollBy({
-        top: cardHeight * 1.75,
-        behavior: 'smooth',
-      });
-    }
-    // Викликати функцію після відтворення кожної наступної групи зображень
-    playNextImageGroup();
-  });
-
-  // Оновлення галереї після додавання нових зображень
-  const lightbox = new SimpleLightbox('.gallery a');
-  lightbox.refresh();
-}
+// Оголошення змінних для пагінації
+const perPage = 40;
+let currentPage = 1;
 
 // Функція для очищення галереї
 function clearGallery() {
@@ -132,7 +81,22 @@ function hideLoadMoreButton() {
 // Приховання кнопки "Load more" при запуску
 hideLoadMoreButton();
 
-// Обробник події для кнопки "Load more"
+// Функція, яка буде виконуватися при прокручуванні сторінки
+function handleScroll() {
+  const scrollPosition = window.pageYOffset;
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  // Перевіряємо, чи досягнута нижня частина сторінки після завантаження нових зображень
+  if (scrollPosition + windowHeight >= documentHeight - 100) {
+    const loadMoreButton = document.querySelector('.load-more');
+    loadMoreButton.style.display = 'block';
+  }
+}
+
+window.addEventListener('scroll', handleScroll);
+
+// Обробник події для кнопки "load-more"
 document.querySelector('.load-more').addEventListener('click', async () => {
   const searchQuery = document.querySelector('input[name="searchQuery"]').value;
 
@@ -156,26 +120,18 @@ document.querySelector('.load-more').addEventListener('click', async () => {
   }
 });
 
-// Отримуємо елемент форми за його ідентифікатором
+// Реалізуємо фіксацію шапки при скролі
 const searchForm = document.getElementById('search-form');
-
-// Отримуємо відстань елементу форми від верхньої частини сторінки
 const searchFormOffsetTop = searchForm.offsetTop;
 
-// Функція, яка буде виконуватися при прокручуванні сторінки
 function handleScroll() {
-  // Отримуємо поточну позицію прокрутки
   const scrollPosition = window.pageYOffset;
 
-  // Перевіряємо, чи прокрутили сторінку вниз досить далеко
   if (scrollPosition >= searchFormOffsetTop) {
-    // Якщо так, додаємо клас "fixed" до елементу форми
     searchForm.classList.add('fixed');
   } else {
-    // Якщо ні, видаляємо клас "fixed" з елементу форми
     searchForm.classList.remove('fixed');
   }
 }
 
-// Додаємо обробник події "scroll" до вікна
 window.addEventListener('scroll', handleScroll);

@@ -60,7 +60,7 @@ function renderImages(images) {
         .firstElementChild.getBoundingClientRect();
 
       window.scrollBy({
-        top: cardHeight * 1.75,
+        top: cardHeight * 0.6,
         behavior: 'smooth',
       });
     }
