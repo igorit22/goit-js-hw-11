@@ -3,7 +3,7 @@ import { searchImages } from './api.js';
 import { renderImages } from './gallery.js';
 
 // Оголошення змінних для пагінації
-const perPage = 40;
+let perPage = 40;
 let currentPage = 1;
 
 // Функція для очищення галереї
