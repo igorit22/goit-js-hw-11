@@ -135,7 +135,7 @@ document.querySelector('.load-more').addEventListener('click', async () => {
 const searchForm = document.getElementById('search-form');
 const searchFormOffsetTop = searchForm.offsetTop;
 
-function handleScroll() {
+function handleScrollHeader() {
   const scrollPosition = window.pageYOffset;
 
   if (scrollPosition >= searchFormOffsetTop) {
@@ -145,4 +145,4 @@ function handleScroll() {
   }
 }
 
-window.addEventListener('scroll', handleScroll);
+window.addEventListener('scroll', handleScrollHeader);
