@@ -115,6 +115,18 @@ document.querySelector('.load-more').addEventListener('click', async () => {
     } else {
       showEndOfResultsMessage();
     }
+
+    // Отримання висоти нового зображення
+    const cardHeight = document
+      .querySelector('.gallery')
+      .lastElementChild.getBoundingClientRect().height;
+
+    // Прокручування нового зображення до вказаної висоти 
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+
   } catch (error) {
     Notiflix.Notify.failure('Error fetching images. Please try again later.');
   }

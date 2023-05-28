@@ -32,16 +32,6 @@ export function renderImages(images) {
     galleryElement.appendChild(photoCard);
   });
 
-  // Прокручування до вказаної висоти нового зображення
-  const { height: cardHeight } = document
-    .querySelector('.gallery')
-    .firstElementChild.getBoundingClientRect();
-
-  window.scrollBy({
-    top: cardHeight * 0.6,
-    behavior: 'smooth',
-  });
-
   // Оновлення галереї після додавання нових зображень
   const lightbox = new SimpleLightbox('.gallery a');
   lightbox.refresh();
