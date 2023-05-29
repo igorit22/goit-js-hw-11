@@ -6,15 +6,19 @@ import { renderImages } from './gallery.js';
 let perPage = 40;
 let currentPage = 1;
 
+// Отримання посилань на елементи DOM
+const searchForm = document.getElementById('search-form');
+const searchInput = document.querySelector('input[name="searchQuery"]');
+const loadMoreButton = document.querySelector('.load-more');
+const galleryElement = document.querySelector('.gallery');
+
 // Функція для очищення галереї
 function clearGallery() {
-  const galleryElement = document.querySelector('.gallery');
   galleryElement.innerHTML = '';
 }
 
 // Функція для відображення повідомлення про кінець результатів пошуку
 function showEndOfResultsMessage() {
-  const loadMoreButton = document.querySelector('.load-more');
   loadMoreButton.style.display = 'none';
 
   Notiflix.Notify.info(
@@ -28,66 +32,64 @@ function showTotalHitsMessage(totalHits) {
 }
 
 // Обробник події для форми пошуку
-document
-  .getElementById('search-form')
-  .addEventListener('submit', async event => {
-    event.preventDefault();
+async function handleSearch(event) {
+  event.preventDefault();
 
-    const searchQuery = document.querySelector(
-      'input[name="searchQuery"]'
-    ).value;
+  const searchQuery = searchInput.value;
 
-    try {
-      clearGallery();
+  try {
+    clearGallery();
 
-      const { hits, totalHits } = await searchImages(searchQuery, 1);
+    const { hits, totalHits } = await searchImages(searchQuery, 1);
 
-      if (hits.length > 0) {
-        renderImages(hits);
+    if (hits.length > 0) {
+      renderImages(hits);
 
-        // Перевірка наявності наступних результатів для пагінації
-        if (totalHits > perPage) {
-          showLoadMoreButton();
-          currentPage = 1;
-        } else {
-          hideLoadMoreButton();
-        }
-
-        showTotalHitsMessage(totalHits);
+      // Перевірка наявності наступних результатів для пагінації
+      if (totalHits > perPage) {
+        showLoadMoreButton();
+        currentPage = 1;
       } else {
-        Notiflix.Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
         hideLoadMoreButton();
       }
-    } catch (error) {
-      Notiflix.Notify.failure('Error fetching images. Please try again later.');
+
+      showTotalHitsMessage(totalHits);
+    } else {
+      Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
       hideLoadMoreButton();
     }
-  });
+  } catch (error) {
+    Notiflix.Notify.failure('Error fetching images. Please try again later.');
+    hideLoadMoreButton();
+  }
+}
+
+searchForm.addEventListener('submit', handleSearch);
 
 // Функція для відображення кнопки "Load more"
 function showLoadMoreButton() {
-  const loadMoreButton = document.querySelector('.load-more');
   loadMoreButton.style.display = 'block';
 }
 
 // Функція для приховування кнопки "Load more"
 function hideLoadMoreButton() {
-  const loadMoreButton = document.querySelector('.load-more');
   loadMoreButton.style.display = 'none';
 }
+
 hideLoadMoreButton();
 
 // Обробник події для кнопки "load-more"
-document.querySelector('.load-more').addEventListener('click', async () => {
-  const searchQuery = document.querySelector('input[name="searchQuery"]').value;
+async function handleLoadMore() {
+  const searchQuery = searchInput.value;
 
   try {
     const { hits, totalHits } = await searchImages(
       searchQuery,
       currentPage + 1
     );
+
     if (hits.length > 0) {
       renderImages(hits);
       currentPage++;
@@ -112,10 +114,11 @@ document.querySelector('.load-more').addEventListener('click', async () => {
   } catch (error) {
     Notiflix.Notify.failure('Error fetching images. Please try again later.');
   }
-});
+}
+
+document.querySelector('.load-more').addEventListener('click', handleLoadMore);
 
 // Реалізуємо фіксацію шапки при скролі
-const searchForm = document.getElementById('search-form');
 const searchFormOffsetTop = searchForm.offsetTop;
 
 function handleScrollHeader() {
